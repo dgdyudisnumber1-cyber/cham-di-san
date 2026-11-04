@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# React Router uses the browser history API, so reloads on deep links
+# must return index.html (not a 404).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

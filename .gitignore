@@ -1,0 +1,22 @@
+# Local environment and package installation
+.env
+.env.*
+!.env.example
+node_modules/
+.npm/
+# Build outputs
+out/
+dist/
+coverage/
+# Editors and OS
+.DS_Store
+Thumbs.db
+.vscode/
+# Python helpers
+__pycache__/
+*.pyc
+# Sensitive exported data should never be committed
+*_SQL.zip
+**/data/auth.*.sql
+**/data/public.contributions.sql
+**/data/public.contact_requests.sql
