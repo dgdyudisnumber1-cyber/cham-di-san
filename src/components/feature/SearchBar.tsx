@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { trackEvent } from '@/lib/analytics';
 
 interface Props {
   variant?: 'hero' | 'plain';
@@ -13,6 +14,8 @@ export default function SearchBar({ variant = 'hero' }: Props) {
     e.preventDefault();
     const trimmed = q.trim();
     if (!trimmed) return;
+    // Do not send the query: it can contain personal information.
+    trackEvent('heritage_search');
     navigate(`/search?q=${encodeURIComponent(trimmed)}`);
   };
 

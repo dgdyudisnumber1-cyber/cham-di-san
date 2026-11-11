@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { validateOrdinaryPostAuthNext } from '@/lib/auth-utils';
+import { trackEvent } from '@/lib/analytics';
 import AuthLayout from './components/AuthLayout';
 
 export default function Login() {
@@ -21,6 +22,7 @@ export default function Login() {
     try {
       const { error: err } = await supabase.auth.signInWithPassword({ email, password });
       if (err) throw err;
+      trackEvent('login', { method: 'email' });
       navigate(validateOrdinaryPostAuthNext(next), { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Đăng nhập thất bại, vui lòng thử lại.');

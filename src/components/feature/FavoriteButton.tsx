@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/auth';
+import { trackEvent } from '@/lib/analytics';
 
 interface Props {
   itemType: 'location' | 'article';
@@ -58,6 +59,7 @@ export default function FavoriteButton({ itemType, itemId, label, variant = 'gho
           .from('favorites')
           .insert({ user_id: user.id, item_type: itemType, item_id: itemId });
         setFav(true);
+        trackEvent('favorite_saved', { item_type: itemType });
       }
     } finally {
       setBusy(false);

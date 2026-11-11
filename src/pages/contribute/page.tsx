@@ -3,6 +3,7 @@ import Header from '@/components/feature/Header';
 import Footer from '@/components/feature/Footer';
 import { supabase } from '@/lib/supabase';
 import type { HeritageLocation } from '@/types/heritage';
+import { trackEvent } from '@/lib/analytics';
 
 type ContentType = 'text' | 'audio';
 
@@ -60,6 +61,7 @@ export default function Contribute() {
       };
       const { error } = await supabase.from('contributions').insert(payload);
       if (error) throw error;
+      trackEvent('contribution_submitted', { content_type: contentType });
       setStatus({ type: 'success', msg: 'Cảm ơn bạn! Đóng góp của bạn đã được gửi và đang chờ quản trị viên duyệt.' });
       setName('');
       setEmail('');

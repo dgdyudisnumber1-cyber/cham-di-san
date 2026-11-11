@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { getAuthRedirectUrl } from '@/lib/auth-utils';
+import { trackEvent } from '@/lib/analytics';
 import AuthLayout from './components/AuthLayout';
 
 type Step = 'form' | 'code';
@@ -42,6 +43,7 @@ export default function Register() {
       if (err) throw err;
       // Session returned = already confirmed, otherwise show code entry
       if (data.session) {
+        trackEvent('sign_up', { method: 'email' });
         navigate('/', { replace: true });
       } else {
         setStep('code');
@@ -64,6 +66,7 @@ export default function Register() {
         type: 'signup',
       });
       if (err) throw err;
+      trackEvent('sign_up', { method: 'email' });
       navigate('/', { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Mã xác nhận không đúng.');
