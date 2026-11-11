@@ -47,17 +47,19 @@ export default function FavoriteButton({ itemType, itemId, label, variant = 'gho
     setBusy(true);
     try {
       if (fav) {
-        await supabase
+        const { error } = await supabase
           .from('favorites')
           .delete()
           .eq('user_id', user.id)
           .eq('item_type', itemType)
           .eq('item_id', itemId);
+        if (error) throw error;
         setFav(false);
       } else {
-        await supabase
+        const { error } = await supabase
           .from('favorites')
           .insert({ user_id: user.id, item_type: itemType, item_id: itemId });
+        if (error) throw error;
         setFav(true);
         trackEvent('favorite_saved', { item_type: itemType });
       }
