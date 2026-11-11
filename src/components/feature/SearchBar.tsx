@@ -28,7 +28,7 @@ export default function SearchBar({ variant = 'hero' }: Props) {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Tìm điểm di sản, bài viết, nghệ nhân..."
-          className="flex-1 bg-transparent text-sm text-foreground-900 focus:outline-none placeholder:text-foreground-400"
+          className="min-w-0 flex-1 bg-transparent text-sm text-foreground-900 focus:outline-none placeholder:text-foreground-400"
         />
         <button
           type="submit"
@@ -51,7 +51,7 @@ export default function SearchBar({ variant = 'hero' }: Props) {
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder="Tìm điểm di sản, bài viết, nghệ nhân..."
-        className="flex-1 bg-transparent text-sm md:text-base text-foreground-900 focus:outline-none placeholder:text-foreground-400"
+        className="min-w-0 flex-1 bg-transparent text-sm md:text-base text-foreground-900 focus:outline-none placeholder:text-foreground-400"
       />
       <button
         type="submit"
