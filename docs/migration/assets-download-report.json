@@ -1,0 +1,231 @@
+{
+  "assets_total": 45,
+  "assets_local": 45,
+  "results": [
+    {
+      "id": "about-hero-01",
+      "status": "cached",
+      "path": "assets/about/about-hero-01.jpg"
+    },
+    {
+      "id": "about-mission-01",
+      "status": "cached",
+      "path": "assets/about/about-mission-01.jpg"
+    },
+    {
+      "id": "article-cong-chieng-01",
+      "status": "cached",
+      "path": "assets/articles/article-cong-chieng-01.jpg"
+    },
+    {
+      "id": "article-den-long-01",
+      "status": "cached",
+      "path": "assets/articles/article-den-long-01.jpg"
+    },
+    {
+      "id": "article-dong-ho-01",
+      "status": "cached",
+      "path": "assets/articles/article-dong-ho-01.jpg"
+    },
+    {
+      "id": "article-dua-ben-tre-01",
+      "status": "cached",
+      "path": "assets/articles/article-dua-ben-tre-01.jpg"
+    },
+    {
+      "id": "article-hoang-thanh-01",
+      "status": "cached",
+      "path": "assets/articles/article-hoang-thanh-01.jpg"
+    },
+    {
+      "id": "article-men-ran-01",
+      "status": "cached",
+      "path": "assets/articles/article-men-ran-01.jpg"
+    },
+    {
+      "id": "article-nuoc-mam-01",
+      "status": "cached",
+      "path": "assets/articles/article-nuoc-mam-01.jpg"
+    },
+    {
+      "id": "article-tho-cam-cham-01",
+      "status": "cached",
+      "path": "assets/articles/article-tho-cam-cham-01.jpg"
+    },
+    {
+      "id": "article-vai-lanh-01",
+      "status": "cached",
+      "path": "assets/articles/article-vai-lanh-01.jpg"
+    },
+    {
+      "id": "artisan-abiu-01",
+      "status": "cached",
+      "path": "assets/sellers/artisan-abiu-01.jpg"
+    },
+    {
+      "id": "artisan-bg-texture-01",
+      "status": "cached",
+      "path": "assets/artisan/artisan-bg-texture-01.jpg"
+    },
+    {
+      "id": "artisan-dang-che-01",
+      "status": "cached",
+      "path": "assets/sellers/artisan-dang-che-01.jpg"
+    },
+    {
+      "id": "artisan-detail-bg-01",
+      "status": "cached",
+      "path": "assets/artisan/artisan-detail-bg-01.jpg"
+    },
+    {
+      "id": "artisan-huynh-ba-01",
+      "status": "cached",
+      "path": "assets/sellers/artisan-huynh-ba-01.jpg"
+    },
+    {
+      "id": "artisan-ktieu-01",
+      "status": "cached",
+      "path": "assets/sellers/artisan-ktieu-01.jpg"
+    },
+    {
+      "id": "artisan-sung-co-01",
+      "status": "cached",
+      "path": "assets/sellers/artisan-sung-co-01.jpg"
+    },
+    {
+      "id": "artisan-tran-do-01",
+      "status": "cached",
+      "path": "assets/sellers/artisan-tran-do-01.jpg"
+    },
+    {
+      "id": "auth-panel-01",
+      "status": "cached",
+      "path": "assets/auth/auth-panel-01.jpg"
+    },
+    {
+      "id": "contribute-cta-bg-01",
+      "status": "cached",
+      "path": "assets/home/contribute-cta-bg-01.jpg"
+    },
+    {
+      "id": "heritage-map-illustration",
+      "status": "cached",
+      "path": "assets/map/vietnam-heritage-map.jpg"
+    },
+    {
+      "id": "hero-cham-di-san-01",
+      "status": "cached",
+      "path": "assets/hero/hero-cham-di-san-01.jpg"
+    },
+    {
+      "id": "loc-bat-trang-01",
+      "status": "cached",
+      "path": "assets/locations/loc-bat-trang-01.jpg"
+    },
+    {
+      "id": "loc-ben-tre-01",
+      "status": "cached",
+      "path": "assets/locations/loc-ben-tre-01.jpg"
+    },
+    {
+      "id": "loc-cham-chaudoc-01",
+      "status": "cached",
+      "path": "assets/locations/loc-cham-chaudoc-01.jpg"
+    },
+    {
+      "id": "loc-dong-ho-01",
+      "status": "cached",
+      "path": "assets/locations/loc-dong-ho-01.jpg"
+    },
+    {
+      "id": "loc-ede-buon-01",
+      "status": "cached",
+      "path": "assets/locations/loc-ede-buon-01.jpg"
+    },
+    {
+      "id": "loc-hoi-an-01",
+      "status": "cached",
+      "path": "assets/locations/loc-hoi-an-01.jpg"
+    },
+    {
+      "id": "loc-hue-citadel-01",
+      "status": "cached",
+      "path": "assets/locations/loc-hue-citadel-01.jpg"
+    },
+    {
+      "id": "loc-lolo-hagiang-01",
+      "status": "cached",
+      "path": "assets/locations/loc-lolo-hagiang-01.jpg"
+    },
+    {
+      "id": "loc-my-son-01",
+      "status": "cached",
+      "path": "assets/locations/loc-my-son-01.jpg"
+    },
+    {
+      "id": "loc-phu-quoc-nuocmam-01",
+      "status": "cached",
+      "path": "assets/locations/loc-phu-quoc-nuocmam-01.jpg"
+    },
+    {
+      "id": "loc-sapa-hmong-01",
+      "status": "cached",
+      "path": "assets/locations/loc-sapa-hmong-01.jpg"
+    },
+    {
+      "id": "loc-thien-mu-01",
+      "status": "cached",
+      "path": "assets/locations/loc-thien-mu-01.jpg"
+    },
+    {
+      "id": "pinterest-con-rong",
+      "status": "cached",
+      "path": "assets/stories/pinterest-con-rong-chau-tien.jpg"
+    },
+    {
+      "id": "product-100000-media-01",
+      "status": "cached",
+      "path": "assets/products/product-100000-01.jpg"
+    },
+    {
+      "id": "story-banh-chung-01",
+      "status": "cached",
+      "path": "assets/stories/story-banh-chung-01.jpg"
+    },
+    {
+      "id": "story-bat-trang-to-nghe-01",
+      "status": "cached",
+      "path": "assets/stories/story-bat-trang-to-nghe-01.jpg"
+    },
+    {
+      "id": "story-cham-khung-det-01",
+      "status": "cached",
+      "path": "assets/stories/story-cham-khung-det-01.jpg"
+    },
+    {
+      "id": "story-chu-dong-tu-01",
+      "status": "cached",
+      "path": "assets/stories/story-chu-dong-tu-01.jpg"
+    },
+    {
+      "id": "story-kim-quy-01",
+      "status": "cached",
+      "path": "assets/stories/story-kim-quy-01.jpg"
+    },
+    {
+      "id": "story-phu-quoc-nuoc-mam-01",
+      "status": "cached",
+      "path": "assets/stories/story-phu-quoc-nuoc-mam-01.jpg"
+    },
+    {
+      "id": "story-son-tinh-01",
+      "status": "cached",
+      "path": "assets/stories/story-son-tinh-01.jpg"
+    },
+    {
+      "id": "story-trau-cau-01",
+      "status": "cached",
+      "path": "assets/stories/story-trau-cau-01.jpg"
+    }
+  ]
+}

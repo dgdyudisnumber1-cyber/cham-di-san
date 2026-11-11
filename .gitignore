@@ -20,3 +20,6 @@ __pycache__/
 **/data/auth.*.sql
 **/data/public.contributions.sql
 **/data/public.contact_requests.sql
+
+# Local Netlify folder
+.netlify

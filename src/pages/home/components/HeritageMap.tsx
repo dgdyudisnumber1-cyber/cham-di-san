@@ -92,21 +92,21 @@ export default function HeritageMap() {
     };
   }, [measureImageBox]);
 
-  const load = () => {
+  const load = async () => {
     setLoading(true);
     setLoadError('');
-    supabase
-      .from('locations')
-      .select('*')
-      .order('id', { ascending: true })
-      .then(({ data, error }) => {
-        if (error) {
-          setLoadError(error.message);
-          return;
-        }
-        setLocations((data as HeritageLocation[]) ?? []);
-      })
-      .finally(() => setLoading(false));
+    try {
+      const { data, error } = await supabase
+        .from('locations')
+        .select('*')
+        .order('id', { ascending: true });
+      if (error) throw error;
+      setLocations((data as HeritageLocation[]) ?? []);
+    } catch (error) {
+      setLoadError(error instanceof Error ? error.message : 'Không thể tải bản đồ di sản. Vui lòng thử lại.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {

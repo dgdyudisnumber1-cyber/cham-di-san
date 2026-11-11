@@ -1,0 +1,366 @@
+{
+  "verified_images": 45,
+  "total_bytes": 26120726,
+  "assets": [
+    {
+      "id": "hero-cham-di-san-01",
+      "path": "assets/hero/hero-cham-di-san-01.jpg",
+      "bytes": 1240508,
+      "sha256": "0ee69487244098e05feefbe82d849c07d765ee1583e70a8e52a63db34ecb6c31",
+      "width": 1792,
+      "height": 992
+    },
+    {
+      "id": "about-hero-01",
+      "path": "assets/about/about-hero-01.jpg",
+      "bytes": 798034,
+      "sha256": "e39befefc1b852394348cca24790c522b04631d7446a60c098cac7b61eec3d5f",
+      "width": 1792,
+      "height": 896
+    },
+    {
+      "id": "about-mission-01",
+      "path": "assets/about/about-mission-01.jpg",
+      "bytes": 754501,
+      "sha256": "d321119089ceb568f1986753f5bbd9119e90f14f8701031864f43b7e2ec60f1b",
+      "width": 896,
+      "height": 1088
+    },
+    {
+      "id": "artisan-detail-bg-01",
+      "path": "assets/artisan/artisan-detail-bg-01.jpg",
+      "bytes": 1061003,
+      "sha256": "cda967a42210e5534ba491179447711b864acc1fd6eb5bf48f1dfac1c6063992",
+      "width": 1792,
+      "height": 896
+    },
+    {
+      "id": "artisan-bg-texture-01",
+      "path": "assets/artisan/artisan-bg-texture-01.jpg",
+      "bytes": 1386279,
+      "sha256": "f55280498b395e1392716ff0b171dc2c0b94b95cf5bcab94a5d072d3d5e858dd",
+      "width": 1792,
+      "height": 992
+    },
+    {
+      "id": "auth-panel-01",
+      "path": "assets/auth/auth-panel-01.jpg",
+      "bytes": 167016,
+      "sha256": "a500f488b1ed27120ffee574a056b37e6198a1f576908db40c6f27719382f69f",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "id": "contribute-cta-bg-01",
+      "path": "assets/home/contribute-cta-bg-01.jpg",
+      "bytes": 833072,
+      "sha256": "e24d27491a8b7e32541aa035dceae98b17d938433efadbff2f2362106b64fc44",
+      "width": 1600,
+      "height": 800
+    },
+    {
+      "id": "heritage-map-illustration",
+      "path": "assets/map/vietnam-heritage-map.jpg",
+      "bytes": 191506,
+      "sha256": "551ba9ce014436df2e47abb81b8ce0a95e9d86dd26d86a49db3dc4e6be6847a4",
+      "width": 768,
+      "height": 1344
+    },
+    {
+      "id": "product-100000-media-01",
+      "path": "assets/products/product-100000-01.jpg",
+      "bytes": 365120,
+      "sha256": "9ef15f2bc382fc5d3d00cb02d415052875459fb43c87f3db715f40120e9af427",
+      "width": 2048,
+      "height": 1365
+    },
+    {
+      "id": "pinterest-con-rong",
+      "path": "assets/stories/pinterest-con-rong-chau-tien.jpg",
+      "bytes": 7098,
+      "sha256": "c966290c8e09d4e84d3c44fc0acb31387523e4ffc64c14ca82d5a24a276d568a",
+      "width": 690,
+      "height": 1227
+    },
+    {
+      "id": "loc-bat-trang-01",
+      "path": "assets/locations/loc-bat-trang-01.jpg",
+      "bytes": 421437,
+      "sha256": "07bc45cfd9430d46127e054676e5a91544a380f2ab96af538ad5b44ed4d22d19",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-sapa-hmong-01",
+      "path": "assets/locations/loc-sapa-hmong-01.jpg",
+      "bytes": 431583,
+      "sha256": "ed308413ccc4df9a7187665ec848f61d4bce57fdeff0c68de62af6c6cabde3b2",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-dong-ho-01",
+      "path": "assets/locations/loc-dong-ho-01.jpg",
+      "bytes": 484612,
+      "sha256": "9bafabd11542b69b769532176959ebd2b5cd5cd58a0a96ee191138c1e9196447",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-hue-citadel-01",
+      "path": "assets/locations/loc-hue-citadel-01.jpg",
+      "bytes": 434547,
+      "sha256": "07abb4017d4772242aa86f56649d476eb5e1868e4f02cee9a0887c89205e5cfb",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-hoi-an-01",
+      "path": "assets/locations/loc-hoi-an-01.jpg",
+      "bytes": 536762,
+      "sha256": "e9399f159ed6ce838854e2560d48c01440ac059b9dc2019269bae079a2952faf",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-ede-buon-01",
+      "path": "assets/locations/loc-ede-buon-01.jpg",
+      "bytes": 498570,
+      "sha256": "f31ac838adad8d9f16367e42cc357f308f58657ac788c437ad54c01aac23bb1e",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-my-son-01",
+      "path": "assets/locations/loc-my-son-01.jpg",
+      "bytes": 562581,
+      "sha256": "fb18f2436ba45f30bce1a55e4194151e04034aa6010b69786b78e4b225e308c2",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-cham-chaudoc-01",
+      "path": "assets/locations/loc-cham-chaudoc-01.jpg",
+      "bytes": 436809,
+      "sha256": "9c42994816111c1e082fd2e1199255a19ab78c9a406607d89505eaa93471d836",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-ben-tre-01",
+      "path": "assets/locations/loc-ben-tre-01.jpg",
+      "bytes": 414333,
+      "sha256": "41e9f26df9a72fd28bd4ec45e7c3060eef1baf0410ee9d8447deaa96899c4cfa",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-thien-mu-01",
+      "path": "assets/locations/loc-thien-mu-01.jpg",
+      "bytes": 302025,
+      "sha256": "2b6d95a75cadeb1e222b142066a1d20af3b652dbb11f83641d206bc8f6453b4a",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-phu-quoc-nuocmam-01",
+      "path": "assets/locations/loc-phu-quoc-nuocmam-01.jpg",
+      "bytes": 447572,
+      "sha256": "308a6e937ca52afdddbea12bb770e1cee19f17ab892b702bb61fcd2aa2aa04f4",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "loc-lolo-hagiang-01",
+      "path": "assets/locations/loc-lolo-hagiang-01.jpg",
+      "bytes": 461784,
+      "sha256": "2ce71c0efcb8e245ccf502d9fb22c50e3c17b05891b95307c8943e8026d7d001",
+      "width": 800,
+      "height": 592
+    },
+    {
+      "id": "article-cong-chieng-01",
+      "path": "assets/articles/article-cong-chieng-01.jpg",
+      "bytes": 872049,
+      "sha256": "f012ff67d683dc244f8ff8e0750e20aed3e040d7afbe212fb209cae9106a4402",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "article-den-long-01",
+      "path": "assets/articles/article-den-long-01.jpg",
+      "bytes": 1075908,
+      "sha256": "6354e998d0f195c1b782c69798ec4e15ca8e33a14983019942541865ca36e7a7",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "article-dua-ben-tre-01",
+      "path": "assets/articles/article-dua-ben-tre-01.jpg",
+      "bytes": 228886,
+      "sha256": "e0b20b77ec38721ed0db64a0ff843c1261204196136a56b07e9d427ab004397a",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "article-men-ran-01",
+      "path": "assets/articles/article-men-ran-01.jpg",
+      "bytes": 656317,
+      "sha256": "38c7714709160e8258c8da905b1c3fa9e016c76f15adaa0a9eaa39fcd889e7a2",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "article-nuoc-mam-01",
+      "path": "assets/articles/article-nuoc-mam-01.jpg",
+      "bytes": 227271,
+      "sha256": "50f11e98f247ea5366ca65b4fe662133b609045979b6e8e33e251be833f927fc",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "article-tho-cam-cham-01",
+      "path": "assets/articles/article-tho-cam-cham-01.jpg",
+      "bytes": 201837,
+      "sha256": "74e2817322c556dc9e808934689a945affd75c91e1c6758795e403592d3af0ef",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "article-dong-ho-01",
+      "path": "assets/articles/article-dong-ho-01.jpg",
+      "bytes": 909898,
+      "sha256": "6980df2894489c979f66b19f3a0148b2a0e93c1cfd93cb729415143736aab26e",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "article-hoang-thanh-01",
+      "path": "assets/articles/article-hoang-thanh-01.jpg",
+      "bytes": 666966,
+      "sha256": "90e3359542f747cad20448c3566ab103db2f7a12173672be22359f75270246eb",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "article-vai-lanh-01",
+      "path": "assets/articles/article-vai-lanh-01.jpg",
+      "bytes": 810541,
+      "sha256": "22f0683214590d81943881e4d61bebca252064fe0dde11ca86aa3a4ec5b972e3",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "story-banh-chung-01",
+      "path": "assets/stories/story-banh-chung-01.jpg",
+      "bytes": 733896,
+      "sha256": "635993658d71bf9fc90d460eca9b3af1e4908ea15581a3054298d7a78117befa",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "story-cham-khung-det-01",
+      "path": "assets/stories/story-cham-khung-det-01.jpg",
+      "bytes": 201837,
+      "sha256": "74e2817322c556dc9e808934689a945affd75c91e1c6758795e403592d3af0ef",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "story-bat-trang-to-nghe-01",
+      "path": "assets/stories/story-bat-trang-to-nghe-01.jpg",
+      "bytes": 251019,
+      "sha256": "84f43d798a801cf465d7a0a3eb76ac8e1c046e154e3833cd19a76d8c7a269c14",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "story-trau-cau-01",
+      "path": "assets/stories/story-trau-cau-01.jpg",
+      "bytes": 809941,
+      "sha256": "70e868fa20a2aca952afd607f2e3be02a21b33d995cd8af3c6cff61082c6f2d9",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "story-chu-dong-tu-01",
+      "path": "assets/stories/story-chu-dong-tu-01.jpg",
+      "bytes": 869881,
+      "sha256": "128e743d2825c0f3e807015ae12c12587315879871a2bd9b5e372f0c6f58f6e3",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "story-phu-quoc-nuoc-mam-01",
+      "path": "assets/stories/story-phu-quoc-nuoc-mam-01.jpg",
+      "bytes": 227271,
+      "sha256": "50f11e98f247ea5366ca65b4fe662133b609045979b6e8e33e251be833f927fc",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "story-son-tinh-01",
+      "path": "assets/stories/story-son-tinh-01.jpg",
+      "bytes": 1264687,
+      "sha256": "69b47ddaee6f766f6a581360466432c48fe835730e89e28d404d86ff3f9bcd6e",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "story-kim-quy-01",
+      "path": "assets/stories/story-kim-quy-01.jpg",
+      "bytes": 965475,
+      "sha256": "7d941678cbed8bbd5c4817774f77a3d1148b5cad0ee09ef92a921ded9aced131",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "artisan-tran-do-01",
+      "path": "assets/sellers/artisan-tran-do-01.jpg",
+      "bytes": 617742,
+      "sha256": "367cb2de6626d753830cd34643a1ae9701b9a61d9ae3bb36c73873ee92f4977b",
+      "width": 800,
+      "height": 992
+    },
+    {
+      "id": "artisan-huynh-ba-01",
+      "path": "assets/sellers/artisan-huynh-ba-01.jpg",
+      "bytes": 105106,
+      "sha256": "12de4db7039e7bcbd633f42029e404a1537adb1ff484c15e0b906fbe80e44c87",
+      "width": 800,
+      "height": 1008
+    },
+    {
+      "id": "artisan-dang-che-01",
+      "path": "assets/sellers/artisan-dang-che-01.jpg",
+      "bytes": 92315,
+      "sha256": "7f410a7590c1294a1f3b59b6279ae3b0303a9e9448a9a220587994f116d7461c",
+      "width": 800,
+      "height": 1008
+    },
+    {
+      "id": "artisan-ktieu-01",
+      "path": "assets/sellers/artisan-ktieu-01.jpg",
+      "bytes": 708718,
+      "sha256": "c4bfcd7d7eb3d6ad3bfe7ecbaa985a3a27f2219ac507083c96c09a8825dfd434",
+      "width": 800,
+      "height": 992
+    },
+    {
+      "id": "artisan-abiu-01",
+      "path": "assets/sellers/artisan-abiu-01.jpg",
+      "bytes": 649435,
+      "sha256": "172fba206256808209594699dc4dc81c8e0d3d92b24ee40728f7202c89fe20e2",
+      "width": 800,
+      "height": 992
+    },
+    {
+      "id": "artisan-sung-co-01",
+      "path": "assets/sellers/artisan-sung-co-01.jpg",
+      "bytes": 736978,
+      "sha256": "3e13101e7e673216b00f5a12844a0ba612233afec4ad676f52783a0be658de77",
+      "width": 800,
+      "height": 992
+    }
+  ]
+}
