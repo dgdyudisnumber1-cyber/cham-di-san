@@ -1,4 +1,5 @@
 import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useOpenAnalyticsPreferences } from './AnalyticsConsent';
 
 const socialChannels = [
   {
@@ -20,6 +21,7 @@ const socialChannels = [
 ];
 
 export default function Footer() {
+  const openAnalyticsPreferences = useOpenAnalyticsPreferences();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -161,6 +163,9 @@ export default function Footer() {
             <a href="#" className="hover:text-accent-400 cursor-pointer">Điều khoản</a>
             <a href="#" className="hover:text-accent-400 cursor-pointer">Bảo mật</a>
             <a href="#" className="hover:text-accent-400 cursor-pointer">FAQ</a>
+            <button type="button" onClick={openAnalyticsPreferences} className="hover:text-accent-400 cursor-pointer">
+              Quyền phân tích
+            </button>
           </div>
         </div>
       </div>

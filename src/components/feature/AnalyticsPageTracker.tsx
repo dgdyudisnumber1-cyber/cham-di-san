@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { trackPageView } from '@/lib/analytics';
+import { initializeAnalytics, trackPageView } from '@/lib/analytics';
 import { useAnalyticsConsent } from './AnalyticsConsent';
 
 export default function AnalyticsPageTracker() {
@@ -10,6 +10,9 @@ export default function AnalyticsPageTracker() {
 
   useEffect(() => {
     if (consent !== 'granted' || lastTrackedLocation.current === location.key) return;
+    // Restore GA4 on reload when the visitor previously granted consent.
+    // A stored consent value alone does not recreate window.gtag.
+    initializeAnalytics();
     lastTrackedLocation.current = location.key;
     trackPageView(location.pathname);
   }, [consent, location.key, location.pathname]);
