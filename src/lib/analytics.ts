@@ -19,7 +19,11 @@ export function initializeAnalytics() {
   if (!isAnalyticsConfigured() || initialized || typeof window === 'undefined') return;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = window.gtag ?? ((...args: unknown[]) => window.dataLayer?.push(args));
+  // Match Google's official gtag snippet: each command must be queued as the
+  // function's Arguments object, not as a rest-parameter Array.
+  window.gtag = window.gtag ?? function gtag(..._args: unknown[]) {
+    window.dataLayer?.push(arguments);
+  };
   window.gtag('js', new Date());
   window.gtag('consent', 'default', {
     ad_storage: 'denied',
