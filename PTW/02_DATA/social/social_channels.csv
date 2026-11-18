@@ -1,0 +1,3 @@
+﻿platform,channel_name,url,source,verification
+Facebook,Cham Di San,https://www.facebook.com/profile.php?id=61594814327595,src/components/feature/SocialDock.tsx; Footer.tsx; about/page.tsx,declared_in_site_code; external post metrics not verified
+TikTok,@chamdisan,https://www.tiktok.com/@chamdisan,src/components/feature/SocialDock.tsx; Footer.tsx; about/page.tsx,declared_in_site_code; external post metrics not verified

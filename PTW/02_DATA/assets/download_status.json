@@ -1,0 +1,14 @@
+{
+  "manifest_unique_assets": 45,
+  "manifest_references": 57,
+  "source_hosts": {
+    "readdy.ai": 42,
+    "public.readdy.ai": 1,
+    "storage.helloreaddy.io": 1,
+    "i.pinimg.com": 1
+  },
+  "downloaded_asset_count": 0,
+  "download_status": "BLOCKED_NETWORK_DNS",
+  "reason": "Container network could not resolve readdy.ai; zero image files obtained. URLs retained in manifest.",
+  "manual_recovery": "Run python3 scripts/backup_assets.py --download in GitHub Codespaces and keep the report; only upload verified images with usage rights."
+}
