@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chạm Di Sản – Báo cáo tổng quan</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg2: #1a1a1a;
+    --bg3: #242424;
+    --border: #2e2e2e;
+    --text: #ffffff;
+    --text2: #a0a0a0;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --green: #10b981;
+    --red: #ef4444;
+    --yellow: #f59e0b;
+    --tiktok: #fe2c55;
+    --tiktok2: #25f4ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; }
+
+  /* STICKY HEADER */
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15,15,15,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+  .header-inner {
+    display: flex; align-items: center; gap: 24px;
+    max-width: 1400px; margin: 0 auto; height: 56px;
+  }
+  .logo { font-size: 15px; font-weight: 700; color: var(--blue); white-space: nowrap; letter-spacing: 0.5px; }
+  .logo span { color: var(--text2); font-weight: 400; font-size: 12px; margin-left: 8px; }
+  .tabs { display: flex; gap: 4px; overflow-x: auto; }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--text2); font-size: 13px; font-weight: 500;
+    padding: 6px 14px; border-radius: 20px; white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { background: var(--bg3); color: var(--text); }
+  .tab-btn.active { background: var(--blue); color: #fff; }
+
+  /* MAIN */
+  .main { max-width: 1400px; margin: 0 auto; padding: 24px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-size: 13px; font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin: 24px 0 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::after { content:''; flex:1; height:1px; background: var(--border); }
+
+  /* KPI CARDS */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px,1fr)); gap: 12px; margin-bottom: 24px; }
+  .kpi-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .kpi-card:hover { border-color: var(--blue); transition: border-color 0.2s; }
+  .kpi-top { display: flex; align-items: center; justify-content: space-between; }
+  .kpi-icon { font-size: 20px; }
+  .kpi-badge {
+    font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.5px;
+  }
+  .badge-ga4 { background: rgba(59,130,246,0.2); color: var(--blue); border: 1px solid rgba(59,130,246,0.4); }
+  .badge-meta { background: rgba(139,92,246,0.2); color: var(--purple); border: 1px solid rgba(139,92,246,0.4); }
+  .kpi-value { font-size: 28px; font-weight: 700; line-height: 1; }
+  .kpi-label { font-size: 12px; color: var(--text2); }
+  .kpi-sub { font-size: 11px; color: var(--green); }
+
+  /* CHARTS */
+  .chart-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; margin-bottom: 16px;
+  }
+  .chart-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: var(--text); }
+  .chart-wrap { position: relative; height: 280px; }
+  .chart-wrap.sm { height: 220px; }
+  .chart-wrap.md { height: 300px; }
+
+  /* GRID LAYOUTS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: var(--bg3); color: var(--text2);
+    text-align: left; padding: 10px 12px; font-weight: 600;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+  }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.03); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .pct-cell { font-size: 11px; color: var(--text2); }
+
+  /* MINI BAR */
+  .mini-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .mini-bar { height: 6px; border-radius: 3px; background: var(--blue); min-width: 2px; flex-shrink: 0; opacity: 0.7; }
+  .mini-bar.purple { background: var(--purple); }
+  .mini-bar.green { background: var(--green); }
+
+  /* BADGES */
+  .tag {
+    display: inline-block; font-size: 10px; font-weight: 600;
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .tag-blue { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .tag-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+  .tag-green { background: rgba(16,185,129,0.15); color: var(--green); }
+
+  /* SOCIAL TAB */
+  .social-banner {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 16px; padding: 28px 32px; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .social-banner-icon { font-size: 40px; }
+  .social-banner-title { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+  .social-banner-sub { font-size: 13px; color: var(--text2); margin-top: 4px; }
+  .social-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  @media (max-width: 700px) { .social-kpi-grid { grid-template-columns: repeat(2,1fr); } }
+  .social-kpi {
+    background: linear-gradient(135deg, #1e3a5f, #1a2d4a);
+    border: 1px solid rgba(59,130,246,0.3); border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .social-kpi-val { font-size: 30px; font-weight: 800; color: var(--blue); }
+  .social-kpi-label { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+  /* TIKTOK SECTION */
+  .tiktok-banner {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0010 50%, #200015 100%);
+    border: 1px solid rgba(254,44,85,0.4);
+    border-radius: 16px; padding: 24px 32px; margin: 28px 0 20px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .tiktok-banner-icon { font-size: 36px; }
+  .tiktok-banner-title { font-size: 20px; font-weight: 800; color: var(--tiktok); letter-spacing: 1px; }
+  .tiktok-banner-sub { font-size: 13px; color: var(--text2); margin-top: 4px; }
+  .tiktok-kpi-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 24px; }
+  @media (max-width: 900px) { .tiktok-kpi-grid { grid-template-columns: repeat(3,1fr); } }
+  @media (max-width: 600px) { .tiktok-kpi-grid { grid-template-columns: repeat(2,1fr); } }
+  .tiktok-kpi {
+    background: linear-gradient(135deg, #1a0010, #200015);
+    border: 1px solid rgba(254,44,85,0.3); border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .tiktok-kpi-val { font-size: 28px; font-weight: 800; color: var(--tiktok); }
+  .tiktok-kpi-val.teal { color: var(--tiktok2); }
+  .tiktok-kpi-label { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+
+  /* KPI: responsive summary, compact table, and dependency-free progress bars */
+  .kpi-summary-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-bottom:24px; }
+  .kpi-summary-card { text-align:center; margin-bottom:0; padding:19px 12px; }
+  .kpi-summary-value { font-size:35px; font-weight:800; line-height:1.2; font-variant-numeric:tabular-nums; }
+  .kpi-summary-label { font-size:13px; font-weight:650; margin-top:4px; }
+  .kpi-summary-sub { margin-top:4px; color:var(--text2); font-size:11px; }
+  .kpi-table-tip { display:none; color:var(--text2); font-size:11px; margin:-4px 0 10px; }
+  .kpi-table { min-width:970px; }
+  .kpi-table th { white-space:nowrap; }
+  .kpi-table td { line-height:1.45; }
+  .kpi-table .kpi-metric { max-width:225px; }
+  .kpi-table .kpi-note { min-width:165px; max-width:255px; white-space:normal; color:var(--text2); font-size:11px; }
+  .kpi-table .kpi-percent { white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:700; }
+  .kpi-progress-chart { display:flex; flex-direction:column; gap:13px; padding:4px 0 9px; }
+  .kpi-progress-row { display:grid; grid-template-columns:105px minmax(0,1fr) 105px; gap:14px; align-items:center; min-height:32px; }
+  .kpi-progress-code { display:flex; align-items:center; gap:7px; color:#e4e4e7; font-size:12px; font-weight:700; }
+  .kpi-progress-code small { color:var(--text2); font-size:9px; font-weight:500; }
+  .kpi-progress-track { height:22px; border-radius:6px; overflow:hidden; background:rgba(255,255,255,.08); position:relative; }
+  .kpi-progress-track:after { content:''; position:absolute; inset:0; background:linear-gradient(to right,transparent 24.8%,rgba(255,255,255,.07) 25%,transparent 25.2%,transparent 49.8%,rgba(255,255,255,.07) 50%,transparent 50.2%,transparent 74.8%,rgba(255,255,255,.07) 75%,transparent 75.2%); pointer-events:none; }
+  .kpi-progress-fill { height:100%; border-radius:6px; min-width:0; }
+  .kpi-progress-pct { color:#f4f4f5; font-weight:700; font-size:12px; text-align:right; font-variant-numeric:tabular-nums; }
+  .kpi-progress-axis { display:flex; justify-content:space-between; margin:3px 105px 0 119px; color:var(--text2); font-size:10px; }
+  .kpi-footnote { color:var(--text2); margin-top:14px; font-size:11px; line-height:1.55; }
+  .chart-unavailable { color:var(--text2); padding:36px 12px; text-align:center; font-size:13px; }
+  @media (max-width:900px) { .kpi-summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (max-width:700px) {
+    .header { padding:0 12px; }
+    .header-inner { height:auto; min-height:56px; display:flex; flex-wrap:wrap; gap:6px; padding:9px 0 6px; }
+    .logo { flex:0 0 100%; width:100%; font-size:14px; }
+    .logo span { margin-left:5px; }
+    .tabs { flex:0 0 100%; width:100%; overflow-x:auto; padding:0 0 4px; scrollbar-width:thin; }
+    .tab-btn { flex-shrink:0; }
+  }
+  @media (max-width:580px) {
+    .main { padding:15px; }
+    .kpi-summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .kpi-summary-value { font-size:29px; }
+    .kpi-table-tip { display:block; }
+    .kpi-progress-row { grid-template-columns:62px minmax(0,1fr) 75px; gap:7px; }
+    .kpi-progress-code { display:block; }
+    .kpi-progress-code small { display:block; }
+    .kpi-progress-axis { margin-left:70px; margin-right:82px; }
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 20px 24px;
+    color: var(--text2); font-size: 12px;
+    border-top: 1px solid var(--border); margin-top: 32px;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- STICKY HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">🏺 Chạm Di Sản <span>05/10 – 17/11/2026 · 44 ngày</span></div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('t1',this)">📊 Tổng quan & Xu hướng</button>
+      <button class="tab-btn" onclick="showTab('t2',this)">📱 Thiết bị & Địa lý</button>
+      <button class="tab-btn" onclick="showTab('t3',this)">🔗 Nguồn & Sự kiện</button>
+      <button class="tab-btn" onclick="showTab('t4',this)">🎯 Chuyển đổi & Trang</button>
+      <button class="tab-btn" onclick="showTab('t5',this)">🔵 Social</button>
+      <button class="tab-btn" onclick="showTab('t6',this)">📋 KPI & Đối chiếu</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ================================================================ TAB 1 -->
+<div id="t1" class="tab-panel active">
+  <div class="section-title">Chỉ số tổng quan (44 ngày · 05/10–17/11/2026)</div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-top"><span class="kpi-icon">👤</span><span class="kpi-badge badge-ga4">GA4</span></div>
+      <div class="kpi-value">3.060</div>
+      <div class="kpi-label">Người dùng-ngày</div>
+      <div class="kpi-sub">TB 69,5 người/ngày · 44 ngày</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-top"><span class="kpi-icon">📄</span><span class="kpi-badge badge-ga4">GA4</span></div>
+      <div class="kpi-value">8.925</div>
+      <div class="kpi-label">Lượt xem trang</div>
+      <div class="kpi-sub">TB 202,8 lượt xem/ngày</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-top"><span class="kpi-icon">🔄</span><span class="kpi-badge badge-ga4">GA4</span></div>
+      <div class="kpi-value">3.741</div>
+      <div class="kpi-label">Phiên truy cập</div>
+      <div class="kpi-sub">TB 85,0 phiên/ngày</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-top"><span class="kpi-icon">🖱️</span><span class="kpi-badge badge-ga4">GA4</span></div>
+      <div class="kpi-value">3.231</div>
+      <div class="kpi-label">Click nội dung</div>
+      <div class="kpi-sub">TB 02:08 / người dùng</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-top"><span class="kpi-icon">🔗</span><span class="kpi-badge badge-meta">Meta</span></div>
+      <div class="kpi-value" style="color:var(--purple)">254</div>
+      <div class="kpi-label">Click liên kết FB</div>
+      <div class="kpi-sub">19 bài · 401 lượt xem</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-top"><span class="kpi-icon">🎵</span><span class="kpi-badge" style="background:rgba(254,44,85,0.2);color:#fe2c55;border:1px solid rgba(254,44,85,0.4)">TikTok</span></div>
+      <div class="kpi-value" style="color:#fe2c55">3.825</div>
+      <div class="kpi-label">Lượt xem TikTok</div>
+      <div class="kpi-sub">8 video · 141 tương tác</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">📈 Người dùng hoạt động theo ngày</div>
+    <div class="chart-wrap">
+      <canvas id="chartDailyUsers"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">🔄 Phiên truy cập & Lượt xem trang theo ngày</div>
+    <div class="chart-wrap">
+      <canvas id="chartDailySessions"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ TAB 2 -->
+<div id="t2" class="tab-panel">
+  <div class="section-title">Thiết bị, Quốc gia & Công nghệ</div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-title">📱 Thiết bị truy cập</div>
+      <div class="chart-wrap">
+        <canvas id="chartDevice"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">🌏 Quốc gia (Top 5)</div>
+      <div class="chart-wrap">
+        <canvas id="chartCountry"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-title">💻 Hệ điều hành</div>
+      <div class="chart-wrap">
+        <canvas id="chartOS"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">🌐 Trình duyệt</div>
+      <div class="chart-wrap">
+        <canvas id="chartBrowser"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ TAB 3 -->
+<div id="t3" class="tab-panel">
+  <div class="section-title">Nguồn truy cập</div>
+  <div class="chart-card">
+    <div class="chart-title">🔗 Top Nguồn Truy Cập</div>
+    <div class="table-wrap">
+      <table id="trafficTable"></table>
+    </div>
+  </div>
+
+  <div class="section-title">Sự kiện người dùng</div>
+  <div class="chart-card">
+    <div class="chart-title">⚡ Top Events</div>
+    <div class="table-wrap">
+      <table id="eventsTable"></table>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">📊 Phân phối sự kiện</div>
+    <div class="chart-wrap md">
+      <canvas id="chartEvents"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ TAB 4 -->
+<div id="t4" class="tab-panel">
+  <div class="section-title">Chuyển đổi</div>
+  <div class="chart-card">
+    <div class="chart-title">🎯 Các sự kiện chuyển đổi</div>
+    <div class="table-wrap">
+      <table id="convTable"></table>
+    </div>
+  </div>
+
+  <div class="section-title">Trang được xem nhiều nhất</div>
+  <div class="chart-card">
+    <div class="chart-title">📄 Top Pages theo lượt xem</div>
+    <div class="chart-wrap md">
+      <canvas id="chartPages"></canvas>
+    </div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">📄 Chi tiết trang</div>
+    <div class="table-wrap">
+      <table id="pagesTable"></table>
+    </div>
+  </div>
+
+  <div class="section-title">Trang đích (Landing Pages)</div>
+  <div class="chart-card">
+    <div class="chart-title">🚀 Landing Pages</div>
+    <div class="table-wrap">
+      <table id="landingTable"></table>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ TAB 5 -->
+<div id="t5" class="tab-panel">
+  <div class="social-banner">
+    <div class="social-banner-icon">📘</div>
+    <div>
+      <div class="social-banner-title">SOCIAL ANALYTICS</div>
+      <div class="social-banner-sub">🔵 Facebook &nbsp;·&nbsp; 🎵 TikTok</div>
+    </div>
+    <div style="margin-left:auto;display:flex;gap:12px;align-items:center">
+      <span style="font-size:12px;color:#a0a0a0">05/10 – 17/11/2026</span>
+    </div>
+  </div>
+
+  <div class="section-title">Facebook – Chỉ số tổng quan</div>
+  <div class="social-kpi-grid">
+    <div class="social-kpi">
+      <div class="social-kpi-val" id="fbImpressions">180</div>
+      <div class="social-kpi-label">Tổng lượt hiển thị</div>
+    </div>
+    <div class="social-kpi">
+      <div class="social-kpi-val" id="fbViews">401</div>
+      <div class="social-kpi-label">Tổng lượt xem</div>
+    </div>
+    <div class="social-kpi">
+      <div class="social-kpi-val" id="fbInteractions">42</div>
+      <div class="social-kpi-label">Tổng tương tác</div>
+    </div>
+    <div class="social-kpi">
+      <div class="social-kpi-val" id="fbLinks">254</div>
+      <div class="social-kpi-label">Tổng click liên kết</div>
+    </div>
+  </div>
+
+  <div class="section-title">Facebook – Bài đăng</div>
+  <div class="chart-card">
+    <div class="chart-title">📋 Danh sách bài đăng (sắp xếp theo Click liên kết)</div>
+    <div class="table-wrap">
+      <table id="fbTable"></table>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">🏆 Top 5 bài đăng hiệu quả nhất (theo Click liên kết)</div>
+    <div class="chart-wrap md">
+      <canvas id="chartFbTop"></canvas>
+    </div>
+  </div>
+
+  <!-- ======== TIKTOK SECTION ======== -->
+  <div class="tiktok-banner">
+    <div class="tiktok-banner-icon">🎵</div>
+    <div>
+      <div class="tiktok-banner-title">TIKTOK ANALYTICS</div>
+      <div class="tiktok-banner-sub">@chamdisan · Heritage Map Việt Nam · 15/10 – 17/11/2026</div>
+    </div>
+    <div style="margin-left:auto">
+      <span style="font-size:11px;background:rgba(254,44,85,0.15);color:#fe2c55;border:1px solid rgba(254,44,85,0.3);padding:3px 10px;border-radius:12px;font-weight:600">8 video · 1 bài ảnh</span>
+    </div>
+  </div>
+
+  <div class="section-title">TikTok – Chỉ số tổng quan</div>
+  <div class="tiktok-kpi-grid">
+    <div class="tiktok-kpi">
+      <div class="tiktok-kpi-val" id="ttTotalViews">3.825</div>
+      <div class="tiktok-kpi-label">👁️ Lượt xem</div>
+    </div>
+    <div class="tiktok-kpi">
+      <div class="tiktok-kpi-val" id="ttTotalInteractions">141</div>
+      <div class="tiktok-kpi-label">⚡ Lượt tương tác</div>
+    </div>
+    <div class="tiktok-kpi">
+      <div class="tiktok-kpi-val" id="ttTotalLikes">137</div>
+      <div class="tiktok-kpi-label">❤️ Lượt thích</div>
+    </div>
+    <div class="tiktok-kpi">
+      <div class="tiktok-kpi-val teal" id="ttTotalShares">9</div>
+      <div class="tiktok-kpi-label">🔗 Lượt chia sẻ</div>
+    </div>
+    <div class="tiktok-kpi">
+      <div class="tiktok-kpi-val teal" id="ttEngagementRate">3,7%</div>
+      <div class="tiktok-kpi-label">📊 Tỷ lệ tương tác</div>
+    </div>
+  </div>
+
+  <div class="section-title">TikTok – Danh sách video</div>
+  <div class="chart-card">
+    <div class="chart-title">📋 Danh sách nội dung TikTok (theo lượt xem)</div>
+    <div class="table-wrap">
+      <table id="ttTable"></table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-title">👁️ Lượt xem theo nội dung</div>
+      <div class="chart-wrap md">
+        <canvas id="chartTtViews"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">❤️ Tương tác nội dung: Thích · Chia sẻ · Bình luận</div>
+      <div class="chart-wrap md">
+        <canvas id="chartTtEngagement"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ TAB 6 KPI -->
+<div id="t6" class="tab-panel">
+  <div class="section-title">Đối chiếu KPI · 05/10–17/11/2026 (44 ngày)</div>
+
+  <!-- KPI Summary cards: values are calculated from the KPI dataset below -->
+  <div class="kpi-summary-grid" aria-label="Tóm tắt kết quả KPI">
+    <div class="chart-card kpi-summary-card">
+      <div class="kpi-summary-value" id="kpiMetCount" style="color:#10b981">0</div>
+      <div class="kpi-summary-label">KPI Đạt</div>
+      <div class="kpi-summary-sub">/ <span id="kpiTotalCount">9</span> KPI</div>
+    </div>
+    <div class="chart-card kpi-summary-card">
+      <div class="kpi-summary-value" id="kpiUnmetCount" style="color:#ef4444">9</div>
+      <div class="kpi-summary-label">KPI Chưa đạt</div>
+      <div class="kpi-summary-sub">cần cải thiện</div>
+    </div>
+    <div class="chart-card kpi-summary-card">
+      <div class="kpi-summary-value" id="kpiVerifyCount" style="color:#f59e0b">0</div>
+      <div class="kpi-summary-label">Cần xác minh</div>
+      <div class="kpi-summary-sub">chưa xác định được trạng thái</div>
+    </div>
+    <div class="chart-card kpi-summary-card">
+      <div class="kpi-summary-value" id="kpiSocialAvg" style="color:#3b82f6">41,2%</div>
+      <div class="kpi-summary-label">Tỷ lệ đạt Social</div>
+      <div class="kpi-summary-sub">trung bình 6 KPI Facebook và TikTok</div>
+    </div>
+  </div>
+
+  <!-- KPI Table -->
+  <div class="chart-card">
+    <div class="chart-title">📋 Bảng đối chiếu KPI chi tiết</div>
+    <p class="kpi-table-tip">Vuốt ngang bảng để xem mục tiêu, kết quả và đánh giá.</p>
+    <div class="table-wrap">
+      <table id="kpiTable" class="kpi-table" aria-label="Bảng so sánh chín chỉ tiêu KPI"></table>
+    </div>
+  </div>
+
+  <!-- KPI Progress chart -->
+  <div class="chart-card">
+    <div class="chart-title">📊 Mức độ hoàn thành KPI (% đạt mục tiêu)</div>
+    <div id="kpiProgressChart" class="kpi-progress-chart" aria-label="Biểu đồ tiến độ chín KPI"></div>
+    <div class="kpi-progress-axis" aria-hidden="true"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+    <p class="kpi-footnote">WEB01 dùng tổng người dùng-ngày làm giới hạn trên khi đối chiếu; không phải số người dùng duy nhất trong kỳ.</p>
+  </div>
+
+  <!-- Summary notes -->
+  <div class="chart-card" style="background:rgba(59,130,246,0.05);border-color:rgba(59,130,246,0.2)">
+    <div class="chart-title">📌 Tổng kết & Hướng hành động</div>
+    <div style="line-height:1.9;font-size:13px;color:#d0d0d0">
+      <p><strong style="color:#fff">🌐 Website:</strong> 3.060 người dùng-ngày · 3.741 phiên · 8.925 lượt xem · TB <strong>69,5 người/ngày</strong>. Chưa có ngày nào đạt ≥100 người dùng (mục tiêu 44/44 ngày). Cần tăng lên 150 người dùng/ngày (khoảng 2,2 lần mức hiện tại).</p>
+      <p style="margin-top:10px"><strong style="color:#1877F2">🔵 Facebook:</strong> 19 bài đăng · <strong>401 lượt xem</strong> (mục tiêu 1.000) · 42 tương tác (mục tiêu 100) · 254 click liên kết. Cần đẩy mạnh phân phối và tần suất bài đăng.</p>
+      <p style="margin-top:10px"><strong style="color:#fe2c55">🎵 TikTok:</strong> 8 video · <strong>3.825 lượt xem</strong> (mục tiêu 9.000 — đạt 42,5%) · 141 tương tác (mục tiêu 350 — đạt 40,3%). Video <em>Chuồn chuồn tre</em> hiệu quả nhất với 1.076 lượt xem.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<footer>🏺 Chạm Di Sản &nbsp;|&nbsp; Báo cáo tổng quan Website · Facebook · TikTok &nbsp;|&nbsp; 05/10 – 17/11/2026</footer>
+
+<script>
+// ================================================================
+// DATA
+// ================================================================
+const dailyLabels = ['05/10','06/10','07/10','08/10','09/10','10/10','11/10','12/10','13/10','14/10','15/10','16/10','17/10','18/10','19/10','20/10','21/10','22/10','23/10','24/10','25/10','26/10','27/10','28/10','29/10','30/10','31/10','01/11','02/11','03/11','04/11','05/11','06/11','07/11','08/11','09/11','10/11','11/11','12/11','13/11','14/11','15/11','16/11','17/11'];
+const dailyUsers = [72,72,78,70,74,79,69,65,61,56,62,61,68,79,76,71,74,72,75,74,73,63,67,63,69,65,73,78,84,78,86,78,68,77,74,64,71,71,66,68,86,11,67,52];
+const dailySessions = [80,90,95,85,94,96,81,77,68,66,77,71,85,92,88,85,88,92,85,85,92,76,77,76,77,75,86,93,98,91,102,90,80,93,83,71,86,80,80,77,99,38,135,106];
+const dailyPageviews = [181,188,231,197,221,241,185,174,149,144,188,154,201,205,201,201,206,202,192,196,216,175,179,174,183,171,199,220,224,204,255,215,182,222,187,159,213,187,175,168,217,136,492,315];
+
+const trafficSources = [
+  {source:'(not set)', medium:'(not set)', sessions:1731, pct:50.0},
+  {source:'(direct)', medium:'(none)', sessions:1594, pct:46.1},
+  {source:'chatgpt.com', medium:'ai-assistant', sessions:38, pct:1.1},
+  {source:'tagassistant.google.com', medium:'referral', sessions:38, pct:1.1},
+  {source:'zalo', medium:'zalo', sessions:38, pct:1.1},
+  {source:'chat.zalo.me', medium:'referral', sessions:19, pct:0.6},
+];
+
+const events = [
+  {name:'page_view', count:7982, pct:67.8, users:1939},
+  {name:'session_start', count:3462, pct:9.5, users:1939},
+  {name:'content_click', count:3231, pct:8.1, users:1503},
+  {name:'user_engagement', count:3099, pct:6.9, users:1829},
+  {name:'scroll', count:1914, pct:7.2, users:1352},
+  {name:'click', count:38, pct:0.3, users:38},
+  {name:'form_start', count:19, pct:0.1, users:19},
+  {name:'heritage_search', count:19, pct:0.1, users:19},
+];
+
+const conversions = [
+  {name:'favorite_saved', count:148, pct:40.3, users:142},
+  {name:'artisan_contact_click', count:104, pct:28.3, users:100},
+  {name:'newsletter_subscribe', count:70, pct:19.1, users:70},
+  {name:'contribution_submitted', count:26, pct:7.1, users:26},
+  {name:'sign_up', count:19, pct:5.2, users:19},
+];
+
+const topPages = [
+  {path:'/', views:2155, pct:27.0, users:1322, clicks:880, title:'Trang chủ'},
+  {path:'/heritage-stories', views:829, pct:10.4, users:660, clicks:298, title:'Danh sách câu chuyện'},
+  {path:'/stories', views:800, pct:10.0, users:641, clicks:313, title:'Danh sách bài viết'},
+  {path:'/about', views:377, pct:4.7, users:344, clicks:87, title:'Giới thiệu'},
+  {path:'/location/bat-trang', views:201, pct:2.5, users:189, clicks:65, title:'Bát Tràng'},
+  {path:'/artisan/2', views:159, pct:2.0, users:155, clicks:71, title:'Nghệ nhân'},
+  {path:'/artisan/34', views:159, pct:2.0, users:150, clicks:69, title:'Nghệ nhân'},
+  {path:'/heritage-story/su-tich-ong-to-nghe-gom-bat-trang', views:169, pct:2.1, users:155, clicks:135, title:'Sự tích ông tổ gốm Bát Tràng'},
+];
+
+const landingPages = [
+  {path:'/', sessions:1579, pct:45.6, bounce:10.4},
+  {path:'/stories', sessions:451, pct:13.0, bounce:8.2},
+  {path:'/heritage-stories', sessions:447, pct:12.9, bounce:9.4},
+  {path:'/about', sessions:238, pct:6.9, bounce:12.2},
+  {path:'/search', sessions:62, pct:1.8, bounce:11.3},
+];
+
+const fbPosts = [
+  {title:'🏺 BÁT TRÀNG — Có một làng văn sau những lớp men', date:'10/10/2026', hienThi:25, tuongTac:4, clickLK:24, luotXem:71, chiaSe:1},
+  {title:'✨ CHẠM BẠC ĐỒNG XÂM: Vẻ đẹp nằm ở chi tiết', date:'13/10/2026', hienThi:10, tuongTac:4, clickLK:19, luotXem:39, chiaSe:0},
+  {title:'🐚 VÌ SAO TRANH ĐÔNG HỒ "SÁNG" CẢ KHI ĐÃ KHÔ MÀU?', date:'14/10/2026', hienThi:7, tuongTac:3, clickLK:12, luotXem:20, chiaSe:0},
+  {title:'🎋 CHUỒN CHUỒN TRE THẠCH XÁ: Nghề nằm trên đầu ngón tay', date:'14/10/2026', hienThi:9, tuongTac:2, clickLK:15, luotXem:19, chiaSe:0},
+  {title:'🔥 TRANH LÀNG SÌNH: Những bức tranh được in để đốt', date:'15/10/2026', hienThi:8, tuongTac:2, clickLK:10, luotXem:15, chiaSe:0},
+  {title:'🖌️ VÁN KHẮC GIỮ NÉT. BÀN TAY LÀM NÊN SẮC.', date:'17/10/2026', hienThi:18, tuongTac:3, clickLK:17, luotXem:31, chiaSe:1},
+  {title:'🖤 KHOẢNG TRĂM LƯỢT NHUỘM, CHỈ ĐỂ CÓ MỘT MÀU ĐEN', date:'17/10/2026', hienThi:12, tuongTac:1, clickLK:11, luotXem:21, chiaSe:0},
+  {title:'🌸 HƯƠNG THỦY XUÂN: Hai màu trước khi thành vườn hoa', date:'18/10/2026', hienThi:9, tuongTac:3, clickLK:13, luotXem:18, chiaSe:0},
+  {title:'🖌️ TRONG SƠN MÀI, MÀI CŨNG LÀ VẼ', date:'19/10/2026', hienThi:20, tuongTac:4, clickLK:22, luotXem:41, chiaSe:1},
+  {title:'✨ TỪ VỎ TRAI VÔ TRI ĐẾN BỨC TRANH ÁNH XÀ CỪ', date:'21/10/2026', hienThi:11, tuongTac:3, clickLK:11, luotXem:13, chiaSe:0},
+  {title:'🏺 KHÔNG BÀN XOAY: Người thợ đi vòng quanh khối đất', date:'23/10/2026', hienThi:8, tuongTac:3, clickLK:10, luotXem:12, chiaSe:0},
+  {title:'🏺 13 CHỮ HÁN TRÊN VAI MỘT CHIẾC BÌNH Ở ISTANBUL', date:'24/10/2026', hienThi:9, tuongTac:2, clickLK:12, luotXem:13, chiaSe:0},
+  {title:'🎋 Chuồn chuồn tre – Nét đẹp thủ công truyền thống', date:'26/10/2026', hienThi:10, tuongTac:3, clickLK:15, luotXem:21, chiaSe:0},
+  {title:'Làng hương Thủy Xuân – Nét đẹp di sản xứ Huế', date:'30/10/2026', hienThi:5, tuongTac:0, clickLK:10, luotXem:11, chiaSe:0},
+  {title:'🧵 THÊ LA, LĨNH BƯỞI, CHỒI PHÙNG', date:'03/11/2026', hienThi:6, tuongTac:2, clickLK:10, luotXem:11, chiaSe:0},
+  {title:'🕓 4 GIỜ SÁNG, CẢ LÀNG ĐÃ MANG NÓN RA CHỢ', date:'04/11/2026', hienThi:3, tuongTac:0, clickLK:11, luotXem:12, chiaSe:0},
+  {title:'🌿 LÁ RÁY BÊN TRONG, LÁ SEN BÊN NGOÀI', date:'05/11/2026', hienThi:3, tuongTac:1, clickLK:10, luotXem:10, chiaSe:0},
+  {title:'🧵 PHỐ LỤA VẠN PHÚC – NÉT ĐẸP NGHỀ DỆT TRUYỀN THỐNG', date:'07/11/2026', hienThi:3, tuongTac:1, clickLK:12, luotXem:13, chiaSe:0},
+  {title:'🗿 TƯỢNG SƠN ĐỒNG BẮT ĐẦU TỪ KHUÔN MẶT', date:'10/11/2026', hienThi:4, tuongTac:1, clickLK:10, luotXem:10, chiaSe:0},
+];
+
+// ================================================================
+// TIKTOK DATA
+// ================================================================
+const ttVideos = [
+  {title:'🎋 Chuồn chuồn tre – Nét đẹp thủ công truyền thống', date:'22/10/2026', loai:'Video', thoiLuong:44, luotXem:1076, tuongTac:13, thich:13, luu:0, chiaSe:0, binhLuan:0},
+  {title:'🌸 Làng hương Thủy Xuân – Nét đẹp di sản xứ Huế', date:'28/10/2026', loai:'Video', thoiLuong:0, luotXem:834, tuongTac:18, thich:18, luu:0, chiaSe:1, binhLuan:0},
+  {title:'🧵 LÀNG NGHỀ DỆT LANH LÙNG TÁM – Sợi lanh kết nối văn hóa người Mông', date:'17/11/2026', loai:'Video', thoiLuong:21, luotXem:396, tuongTac:31, thich:31, luu:0, chiaSe:2, binhLuan:0},
+  {title:'🏮 LÀNG CHIẾU TÂN THÀNH – Nét đẹp nghề dệt chiếu truyền thống', date:'16/11/2026', loai:'Video', thoiLuong:0, luotXem:388, tuongTac:43, thich:40, luu:2, chiaSe:1, binhLuan:1},
+  {title:'🪭 LÀNG QUẠT CHÀNG SƠN – Nét đẹp nghề thủ công truyền thống', date:'13/11/2026', loai:'Video', thoiLuong:0, luotXem:380, tuongTac:18, thich:17, luu:1, chiaSe:0, binhLuan:0},
+  {title:'🎏 TRANH ĐÔNG HỒ – Nét đẹp tranh dân gian Việt Nam', date:'12/11/2026', loai:'Video', thoiLuong:0, luotXem:338, tuongTac:6, thich:6, luu:0, chiaSe:0, binhLuan:0},
+  {title:'🎭 TRANH HÀNG TRỐNG – Nét tinh hoa nghệ thuật dân gian Thăng Long', date:'17/11/2026', loai:'Video', thoiLuong:0, luotXem:297, tuongTac:6, thich:6, luu:0, chiaSe:2, binhLuan:0},
+  {title:'🧵 PHỐ LỤA VẠN PHÚC – Nét đẹp nghề dệt lụa truyền thống', date:'05/11/2026', loai:'Video', thoiLuong:0, luotXem:111, tuongTac:4, thich:4, luu:0, chiaSe:2, binhLuan:0},
+  {title:'🏺 BÁT TRÀNG — Có một làng văn sau những lớp men', date:'15/10/2026', loai:'Ảnh', thoiLuong:0, luotXem:5, tuongTac:2, thich:2, luu:0, chiaSe:1, binhLuan:0},
+];
+
+// ================================================================
+// HELPERS
+// ================================================================
+const vi = n => (n||0).toLocaleString('vi-VN');
+const pctBar = (pct, cls='') => `<div class="mini-bar-wrap"><div class="mini-bar ${cls}" style="width:${Math.max(pct,1)}px"></div><span class="pct-cell">${pct}%</span></div>`;
+
+if (typeof window.Chart !== 'undefined' && Chart.defaults) {
+  Chart.defaults.color = '#a0a0a0';
+  Chart.defaults.borderColor = '#2e2e2e';
+}
+function safeChart(canvas, options) {
+  if (!canvas) return null;
+  if (typeof window.Chart !== 'function') {
+    const notice = document.createElement('div');
+    notice.className = 'chart-unavailable';
+    notice.textContent = 'Biểu đồ cần kết nối Internet để tải thư viện. Bảng số liệu và KPI vẫn hoạt động bình thường.';
+    canvas.replaceWith(notice);
+    return null;
+  }
+  try { return new window.Chart(canvas, options); }
+  catch (err) {
+    console.error('Lỗi dựng biểu đồ:', err);
+    const notice = document.createElement('div');
+    notice.className = 'chart-unavailable';
+    notice.textContent = 'Chưa thể hiển thị biểu đồ này.';
+    canvas.replaceWith(notice);
+    return null;
+  }
+}
+
+const chartDefaults = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: { legend: { labels: { color: '#a0a0a0', font: { size: 12 } } } }
+};
+
+// ================================================================
+// TAB SWITCHING
+// ================================================================
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById(id);
+  panel.classList.add('active');
+  btn.classList.add('active');
+  window.requestAnimationFrame(() => {
+    if (typeof window.Chart !== 'undefined' && typeof Chart.getChart === 'function') {
+      panel.querySelectorAll('canvas').forEach(canvas => {
+        const chart = Chart.getChart(canvas);
+        if (chart) chart.resize();
+      });
+    }
+  });
+}
+
+// ================================================================
+// TAB 1 CHARTS
+// ================================================================
+safeChart(document.getElementById('chartDailyUsers'), {
+  type: 'line',
+  data: {
+    labels: dailyLabels,
+    datasets: [{
+      label: 'Người dùng',
+      data: dailyUsers,
+      borderColor: '#3b82f6',
+      backgroundColor: 'rgba(59,130,246,0.1)',
+      fill: true,
+      tension: 0.4,
+      pointRadius: 3,
+      pointHoverRadius: 6,
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    scales: {
+      x: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0', font: { size: 11 } } },
+      y: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0', font: { size: 11 } }, beginAtZero: false }
+    }
+  }
+});
+
+safeChart(document.getElementById('chartDailySessions'), {
+  type: 'line',
+  data: {
+    labels: dailyLabels,
+    datasets: [
+      {
+        label: 'Phiên truy cập',
+        data: dailySessions,
+        borderColor: '#10b981',
+        backgroundColor: 'rgba(16,185,129,0.08)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 3,
+        pointHoverRadius: 6,
+        borderWidth: 2,
+      },
+      {
+        label: 'Lượt xem trang',
+        data: dailyPageviews,
+        borderColor: '#f59e0b',
+        backgroundColor: 'rgba(245,158,11,0.06)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 3,
+        pointHoverRadius: 6,
+        borderWidth: 2,
+      }
+    ]
+  },
+  options: {
+    ...chartDefaults,
+    scales: {
+      x: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0', font: { size: 11 } } },
+      y: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0', font: { size: 11 } }, beginAtZero: false }
+    }
+  }
+});
+
+// ================================================================
+// TAB 2 CHARTS
+// ================================================================
+safeChart(document.getElementById('chartDevice'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Desktop', 'Mobile', 'Tablet'],
+    datasets: [{
+      data: [1376, 535, 28],
+      backgroundColor: ['#3b82f6','#10b981','#f59e0b'],
+      borderColor: '#1a1a1a',
+      borderWidth: 3,
+      hoverOffset: 8,
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    cutout: '60%',
+    plugins: {
+      legend: { position: 'bottom', labels: { color: '#a0a0a0', padding: 16 } },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.label}: ${vi(ctx.raw)} (${((ctx.raw/1939)*100).toFixed(1)}%)`
+        }
+      }
+    }
+  }
+});
+
+safeChart(document.getElementById('chartCountry'), {
+  type: 'bar',
+  data: {
+    labels: ['Việt Nam','Hoa Kỳ','Nhật Bản','Singapore','Khác'],
+    datasets: [{
+      label: 'Người dùng',
+      data: [1793, 63, 39, 34, 10],
+      backgroundColor: ['#3b82f6','#10b981','#f59e0b','#8b5cf6','#ef4444'],
+      borderRadius: 6,
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    indexAxis: 'y',
+    scales: {
+      x: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0' } },
+      y: { grid: { display: false }, ticks: { color: '#fff', font: { size: 12 } } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+safeChart(document.getElementById('chartOS'), {
+  type: 'bar',
+  data: {
+    labels: ['Windows','Android','iOS','macOS','iPadOS','Khác'],
+    datasets: [{
+      label: 'Người dùng',
+      data: [1230, 390, 151, 129, 22, 17],
+      backgroundColor: '#3b82f6',
+      borderRadius: 6,
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    indexAxis: 'y',
+    scales: {
+      x: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0' } },
+      y: { grid: { display: false }, ticks: { color: '#fff', font: { size: 12 } } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+safeChart(document.getElementById('chartBrowser'), {
+  type: 'bar',
+  data: {
+    labels: ['Chrome','Edge','Safari','Safari (in-app)','Firefox','Khác'],
+    datasets: [{
+      label: 'Người dùng',
+      data: [877, 694, 199, 71, 50, 48],
+      backgroundColor: '#8b5cf6',
+      borderRadius: 6,
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    indexAxis: 'y',
+    scales: {
+      x: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0' } },
+      y: { grid: { display: false }, ticks: { color: '#fff', font: { size: 12 } } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// ================================================================
+// TAB 3 TABLES + CHART
+// ================================================================
+(function buildTrafficTable() {
+  const tbl = document.getElementById('trafficTable');
+  const maxS = Math.max(...trafficSources.map(r=>r.sessions));
+  tbl.innerHTML = `
+    <thead><tr>
+      <th>Nguồn</th><th>Phương tiện</th>
+      <th class="num">Phiên</th><th>% Phiên</th>
+    </tr></thead>
+    <tbody>
+    ${trafficSources.map(r=>`<tr>
+      <td><code style="color:#3b82f6;font-size:12px">${r.source}</code></td>
+      <td><span class="tag tag-green">${r.medium}</span></td>
+      <td class="num">${vi(r.sessions)}</td>
+      <td>${pctBar(Math.round(r.pct*1.4))}</td>
+    </tr>`).join('')}
+    </tbody>`;
+})();
+
+(function buildEventsTable() {
+  const tbl = document.getElementById('eventsTable');
+  const maxC = Math.max(...events.map(e=>e.count));
+  tbl.innerHTML = `
+    <thead><tr>
+      <th>Sự kiện</th>
+      <th class="num">Số lần</th>
+      <th>% Sự kiện</th>
+      <th class="num">Người dùng</th>
+    </tr></thead>
+    <tbody>
+    ${events.map(e=>`<tr>
+      <td><code style="color:#10b981;font-size:12px">${e.name}</code></td>
+      <td class="num">
+        <div class="mini-bar-wrap" style="justify-content:flex-end">
+          <span>${vi(e.count)}</span>
+          <div class="mini-bar green" style="width:${Math.round((e.count/maxC)*80)}px"></div>
+        </div>
+      </td>
+      <td>${pctBar(Math.round(e.pct*1.2), 'green')}</td>
+      <td class="num">${vi(e.users)}</td>
+    </tr>`).join('')}
+    </tbody>`;
+})();
+
+safeChart(document.getElementById('chartEvents'), {
+  type: 'bar',
+  data: {
+    labels: events.map(e=>e.name),
+    datasets: [{
+      label: 'Số lần xảy ra',
+      data: events.map(e=>e.count),
+      backgroundColor: ['#3b82f6','#10b981','#f59e0b','#8b5cf6','#ef4444','#06b6d4','#ec4899','#84cc16'],
+      borderRadius: 6,
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#a0a0a0', font:{size:11}, maxRotation:30 } },
+      y: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0' } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// ================================================================
+// TAB 4
+// ================================================================
+(function buildConvTable() {
+  const tbl = document.getElementById('convTable');
+  const maxC = Math.max(...conversions.map(c=>c.count));
+  tbl.innerHTML = `
+    <thead><tr>
+      <th>Sự kiện chuyển đổi</th>
+      <th class="num">Số lần</th>
+      <th>% Chuyển đổi</th>
+      <th class="num">Người dùng</th>
+    </tr></thead>
+    <tbody>
+    ${conversions.map(c=>`<tr>
+      <td><code style="color:#f59e0b;font-size:12px">${c.name}</code></td>
+      <td class="num">${vi(c.count)}</td>
+      <td>${pctBar(Math.round(c.pct*1.5), 'purple')}</td>
+      <td class="num">${vi(c.users)}</td>
+    </tr>`).join('')}
+    </tbody>`;
+})();
+
+safeChart(document.getElementById('chartPages'), {
+  type: 'bar',
+  data: {
+    labels: topPages.map(p=>p.title),
+    datasets: [{
+      label: 'Lượt xem',
+      data: topPages.map(p=>p.views),
+      backgroundColor: 'rgba(59,130,246,0.8)',
+      borderRadius: 6,
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    indexAxis: 'y',
+    scales: {
+      x: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0' } },
+      y: { grid: { display: false }, ticks: { color: '#fff', font: { size: 12 } } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+(function buildPagesTable() {
+  const tbl = document.getElementById('pagesTable');
+  const maxV = Math.max(...topPages.map(p=>p.views));
+  tbl.innerHTML = `
+    <thead><tr>
+      <th>Tiêu đề trang</th>
+      <th>Đường dẫn</th>
+      <th class="num">Lượt xem</th>
+      <th>%</th>
+      <th class="num">Người dùng</th>
+      <th class="num">Clicks</th>
+    </tr></thead>
+    <tbody>
+    ${topPages.map(p=>`<tr>
+      <td>${p.title}</td>
+      <td><code style="color:#a0a0a0;font-size:11px">${p.path}</code></td>
+      <td class="num">${vi(p.views)}</td>
+      <td>${pctBar(Math.round(p.pct*2.5))}</td>
+      <td class="num">${vi(p.users)}</td>
+      <td class="num">${vi(p.clicks)}</td>
+    </tr>`).join('')}
+    </tbody>`;
+})();
+
+(function buildLandingTable() {
+  const tbl = document.getElementById('landingTable');
+  tbl.innerHTML = `
+    <thead><tr>
+      <th>Trang đích</th>
+      <th class="num">Phiên</th>
+      <th>%</th>
+      <th class="num">Tỉ lệ thoát</th>
+    </tr></thead>
+    <tbody>
+    ${landingPages.map(p=>`<tr>
+      <td><code style="color:#3b82f6;font-size:12px">${p.path}</code></td>
+      <td class="num">${vi(p.sessions)}</td>
+      <td>${pctBar(Math.round(p.pct*1.5))}</td>
+      <td class="num" style="color:${p.bounce>11?'#ef4444':'#10b981'}">${p.bounce}%</td>
+    </tr>`).join('')}
+    </tbody>`;
+})();
+
+// ================================================================
+// TAB 5 – FACEBOOK
+// ================================================================
+const fbSorted = [...fbPosts].sort((a,b)=>b.clickLK-a.clickLK);
+
+(function buildFbTable() {
+  const tbl = document.getElementById('fbTable');
+  const maxLX = Math.max(...fbPosts.map(p=>p.luotXem));
+  tbl.innerHTML = `
+    <thead><tr>
+      <th>Tiêu đề bài viết</th>
+      <th>Ngày đăng</th>
+      <th class="num">Hiển thị</th>
+      <th>Lượt xem</th>
+      <th class="num">Tương tác</th>
+      <th class="num">Click LK</th>
+      <th class="num">Chia sẻ</th>
+    </tr></thead>
+    <tbody>
+    ${fbSorted.map(p=>`<tr>
+      <td style="max-width:260px;white-space:normal;font-size:12px">${p.title}</td>
+      <td style="color:#a0a0a0;white-space:nowrap">${p.date}</td>
+      <td class="num">${vi(p.hienThi)}</td>
+      <td>
+        <div class="mini-bar-wrap">
+          <div class="mini-bar purple" style="width:${Math.round((p.luotXem/maxLX)*80)}px"></div>
+          <span>${vi(p.luotXem)}</span>
+        </div>
+      </td>
+      <td class="num">${vi(p.tuongTac)}</td>
+      <td class="num" style="color:#3b82f6;font-weight:600">${vi(p.clickLK)}</td>
+      <td class="num">${vi(p.chiaSe)}</td>
+    </tr>`).join('')}
+    </tbody>`;
+})();
+
+const top5fb = fbSorted.slice(0,5);
+safeChart(document.getElementById('chartFbTop'), {
+  type: 'bar',
+  data: {
+    labels: top5fb.map(p=>{
+      const t = p.title.replace(/^[^\w\s]*\s*/,'');
+      return t.length > 40 ? t.slice(0,38)+'…' : t;
+    }),
+    datasets: [{
+      label: 'Click liên kết',
+      data: top5fb.map(p=>p.clickLK),
+      backgroundColor: ['#3b82f6','#8b5cf6','#10b981','#f59e0b','#ef4444'],
+      borderRadius: 8,
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    indexAxis: 'y',
+    scales: {
+      x: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0' } },
+      y: { grid: { display: false }, ticks: { color: '#fff', font: { size: 12 } } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// ================================================================
+// TAB 6 – KPI & ĐỐI CHIẾU
+// ================================================================
+const kpiData = [
+  {ma:'WEB01', nhom:'WEBSITE', chi_tieu:'Người dùng website toàn kỳ', kpi:5000, don_vi:'người', ket_qua:3060, do_tin_cay:'Người dùng-ngày (cận trên)', ghi_chu:'3.060 người dùng-ngày; người dùng duy nhất không thể vượt quá mức này'},
+  {ma:'WEB02', nhom:'WEBSITE', chi_tieu:'Người dùng hoạt động TB/ngày', kpi:150, don_vi:'người/ngày', ket_qua:69.5, do_tin_cay:'Chính xác', ghi_chu:'Cần tăng lên 150 người/ngày (khoảng 2,2 lần)'},
+  {ma:'WEB03', nhom:'WEBSITE', chi_tieu:'Số ngày đạt ≥100 người dùng', kpi:44, don_vi:'ngày', ket_qua:0, do_tin_cay:'Chính xác', ghi_chu:'0/44 ngày đạt ≥100 người dùng'},
+  {ma:'FB01',  nhom:'FACEBOOK', chi_tieu:'Tổng bài đăng Facebook', kpi:45, don_vi:'bài', ket_qua:19, do_tin_cay:'Dashboard PDF', ghi_chu:'16 ảnh + 3 thước phim'},
+  {ma:'FB02',  nhom:'FACEBOOK', chi_tieu:'Tổng lượt xem Facebook', kpi:1000, don_vi:'lượt xem', ket_qua:401, do_tin_cay:'Dashboard PDF', ghi_chu:'Cần tối ưu phân phối bài đăng'},
+  {ma:'FB03',  nhom:'FACEBOOK', chi_tieu:'Tổng tương tác Facebook', kpi:100, don_vi:'tương tác', ket_qua:42, do_tin_cay:'Dashboard PDF', ghi_chu:'Đạt 42% mục tiêu'},
+  {ma:'TT01',  nhom:'TIKTOK', chi_tieu:'Số video TikTok', kpi:20, don_vi:'video', ket_qua:8, do_tin_cay:'Phân loại nội dung', ghi_chu:'8 video + 1 ảnh; KPI chỉ tính video'},
+  {ma:'TT02',  nhom:'TIKTOK', chi_tieu:'Tổng lượt xem TikTok', kpi:9000, don_vi:'lượt xem', ket_qua:3825, do_tin_cay:'Dashboard PDF', ghi_chu:'Video Chuồn chuồn tre dẫn đầu: 1.076 xem'},
+  {ma:'TT03',  nhom:'TIKTOK', chi_tieu:'Tổng tương tác TikTok', kpi:350, don_vi:'tương tác', ket_qua:141, do_tin_cay:'Dashboard PDF', ghi_chu:'Làng chiếu Tân Thành cao nhất: 43 tương tác'},
+];
+
+// One classification rule drives the cards, table and bars.
+// WEB01 is a bound: even its maximum possible count is below the 5,000 target.
+function classifyKpi(k) {
+  if (!Number.isFinite(k.kpi) || k.kpi <= 0 || !Number.isFinite(k.ket_qua)) return 'CẦN XÁC MINH';
+  if (k.ma === 'WEB01' && k.ket_qua >= k.kpi) return 'CẦN XÁC MINH';
+  return k.ket_qua >= k.kpi ? 'ĐẠT' : 'CHƯA ĐẠT';
+}
+function kpiPct(k) { return 100 * k.ket_qua / k.kpi; }
+function pctVi(v) { return v.toLocaleString('vi-VN', {minimumFractionDigits:1,maximumFractionDigits:1}) + '%'; }
+
+function renderKpi() {
+  const counts = { 'ĐẠT':0, 'CHƯA ĐẠT':0, 'CẦN XÁC MINH':0 };
+  kpiData.forEach(k => counts[classifyKpi(k)]++);
+  const social = kpiData.filter(k => k.nhom === 'FACEBOOK' || k.nhom === 'TIKTOK');
+  const socialAverage = social.reduce((sum,k) => sum + kpiPct(k), 0) / social.length;
+  document.getElementById('kpiMetCount').textContent = vi(counts['ĐẠT']);
+  document.getElementById('kpiUnmetCount').textContent = vi(counts['CHƯA ĐẠT']);
+  document.getElementById('kpiVerifyCount').textContent = vi(counts['CẦN XÁC MINH']);
+  document.getElementById('kpiTotalCount').textContent = vi(kpiData.length);
+  document.getElementById('kpiSocialAvg').textContent = pctVi(socialAverage);
+
+  const color = { WEBSITE:'#3b82f6', FACEBOOK:'#8b5cf6', TIKTOK:'#fe2c55' };
+  const badge = (k) => `<span class="tag" style="background:${color[k.nhom]}20;color:${color[k.nhom]};border:1px solid ${color[k.nhom]}40">${k.nhom}</span>`;
+  const tbl = document.getElementById('kpiTable');
+  tbl.innerHTML = `<thead><tr>
+    <th>Mã</th><th>Nhóm</th><th>Chỉ tiêu</th>
+    <th class="num">Mục tiêu</th><th class="num">Kết quả</th>
+    <th class="num">% đạt</th><th>Đánh giá</th><th class="num">Còn thiếu</th><th>Ghi chú</th>
+  </tr></thead><tbody>${kpiData.map(k => {
+    const status = classifyKpi(k);
+    const rate = pctVi(kpiPct(k));
+    const statusColor = status === 'ĐẠT' ? '#10b981' : status === 'CHƯA ĐẠT' ? '#ef4444' : '#f59e0b';
+    const isBound = k.ma === 'WEB01';
+    const missing = Math.max(0, Math.ceil(k.kpi - k.ket_qua));
+    return `<tr id="kpi-row-${k.ma}">
+      <td><code style="color:#e4e4e7;font-size:11px">${k.ma}</code></td>
+      <td>${badge(k)}</td>
+      <td class="kpi-metric">${k.chi_tieu}</td>
+      <td class="num">${vi(k.kpi)} <span style="color:var(--text2);font-size:10px">${k.don_vi}</span></td>
+      <td class="num" style="font-weight:700">${vi(k.ket_qua)}${isBound ? '*' : ''}</td>
+      <td class="num kpi-percent" style="color:${isBound ? '#f59e0b' : '#e4e4e7'}">${isBound ? '≤' : ''}${rate}</td>
+      <td><span style="color:${statusColor};font-size:11px;font-weight:800;white-space:nowrap">${status}</span></td>
+      <td class="num">${isBound ? '≥' : ''}${vi(missing)}</td>
+      <td class="kpi-note">${k.ghi_chu}</td>
+    </tr>`;
+  }).join('')}</tbody>`;
+
+  // Plain HTML/CSS bars: no Chart.js stacking or hidden-canvas sizing issue.
+  const progressChart = document.getElementById('kpiProgressChart');
+  progressChart.innerHTML = kpiData.map(k => {
+    const rate = Math.max(0,Math.min(100,kpiPct(k)));
+    const bound = k.ma === 'WEB01';
+    const rateText = `${bound ? '≤' : ''}${pctVi(kpiPct(k))}`;
+    return `<div class="kpi-progress-row" aria-label="${k.ma}: ${rateText}">
+      <div class="kpi-progress-code"><strong>${k.ma}</strong><small>${k.nhom}</small></div>
+      <div class="kpi-progress-track" title="${k.chi_tieu}: ${rateText}">
+        <div class="kpi-progress-fill" style="width:${rate}%;background:${color[k.nhom]}"></div>
+      </div>
+      <span class="kpi-progress-pct">${rateText}</span>
+    </div>`;
+  }).join('');
+}
+renderKpi();
+
+// Facebook overview numbers are computed from exactly the 19 posts in the dashboard.
+const fbSums = fbPosts.reduce((sum,p) => ({
+  impressions:sum.impressions + p.hienThi,
+  views:sum.views + p.luotXem,
+  interactions:sum.interactions + p.tuongTac,
+  links:sum.links + p.clickLK,
+}), {impressions:0,views:0,interactions:0,links:0});
+document.getElementById('fbImpressions').textContent = vi(fbSums.impressions);
+document.getElementById('fbViews').textContent = vi(fbSums.views);
+document.getElementById('fbInteractions').textContent = vi(fbSums.interactions);
+document.getElementById('fbLinks').textContent = vi(fbSums.links);
+
+const ttSums = ttVideos.reduce((sum,v) => ({
+  views:sum.views + v.luotXem,
+  interactions:sum.interactions + v.tuongTac,
+  likes:sum.likes + v.thich,
+  shares:sum.shares + v.chiaSe,
+}), {views:0, interactions:0, likes:0, shares:0});
+document.getElementById('ttTotalViews').textContent = vi(ttSums.views);
+document.getElementById('ttTotalInteractions').textContent = vi(ttSums.interactions);
+document.getElementById('ttTotalLikes').textContent = vi(ttSums.likes);
+document.getElementById('ttTotalShares').textContent = vi(ttSums.shares);
+document.getElementById('ttEngagementRate').textContent = pctVi(ttSums.interactions / ttSums.views * 100);
+
+// ================================================================
+// TAB 5 – TIKTOK
+// ================================================================
+(function buildTtTable() {
+  const tbl = document.getElementById('ttTable');
+  const maxXem = Math.max(...ttVideos.map(v => v.luotXem));
+  tbl.innerHTML = `
+    <thead><tr>
+      <th>Tiêu đề video</th>
+      <th>Ngày đăng</th>
+      <th>Loại</th>
+      <th>Lượt xem</th>
+      <th class="num">Tương tác</th>
+      <th class="num">Thích</th>
+      <th class="num">Lưu</th>
+      <th class="num">Chia sẻ</th>
+      <th class="num">Bình luận</th>
+    </tr></thead>
+    <tbody>
+    ${ttVideos.map(v => `<tr>
+      <td style="max-width:260px;white-space:normal;font-size:12px">${v.title}</td>
+      <td style="color:#a0a0a0;white-space:nowrap">${v.date}</td>
+      <td><span class="tag" style="background:rgba(254,44,85,0.15);color:#fe2c55">${v.loai}</span></td>
+      <td>
+        <div class="mini-bar-wrap">
+          <div class="mini-bar" style="background:#fe2c55;width:${Math.round((v.luotXem/maxXem)*90)}px"></div>
+          <span style="font-weight:600;color:#fff">${vi(v.luotXem)}</span>
+        </div>
+      </td>
+      <td class="num" style="color:#fe2c55;font-weight:600">${vi(v.tuongTac)}</td>
+      <td class="num">${vi(v.thich)}</td>
+      <td class="num">${vi(v.luu)}</td>
+      <td class="num" style="color:#25f4ee">${vi(v.chiaSe)}</td>
+      <td class="num">${vi(v.binhLuan)}</td>
+    </tr>`).join('')}
+    </tbody>`;
+})();
+
+// TikTok – Biểu đồ lượt xem theo video
+safeChart(document.getElementById('chartTtViews'), {
+  type: 'bar',
+  data: {
+    labels: ttVideos.map(v => {
+      const t = v.title.replace(/^[^\w\s]*\s*/, '');
+      return t.length > 32 ? t.slice(0, 30) + '…' : t;
+    }),
+    datasets: [{
+      label: 'Lượt xem',
+      data: ttVideos.map(v => v.luotXem),
+      backgroundColor: ttVideos.map((_, i) =>
+        i === 0 ? '#fe2c55' : i === 1 ? '#ff6080' : 'rgba(254,44,85,0.55)'
+      ),
+      borderRadius: 6,
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    indexAxis: 'y',
+    scales: {
+      x: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0' } },
+      y: { grid: { display: false }, ticks: { color: '#fff', font: { size: 11 } } }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => ` ${vi(ctx.raw)} lượt xem` }
+      }
+    }
+  }
+});
+
+// TikTok – Biểu đồ tương tác (thích + chia sẻ + bình luận)
+safeChart(document.getElementById('chartTtEngagement'), {
+  type: 'bar',
+  data: {
+    labels: ttVideos.map(v => {
+      const t = v.title.replace(/^[^\w\s]*\s*/, '');
+      return t.length > 24 ? t.slice(0, 22) + '…' : t;
+    }),
+    datasets: [
+      {
+        label: 'Lượt thích',
+        data: ttVideos.map(v => v.thich),
+        backgroundColor: '#fe2c55',
+        borderRadius: 4,
+        borderWidth: 0,
+        stack: 'engage',
+      },
+      {
+        label: 'Lượt chia sẻ',
+        data: ttVideos.map(v => v.chiaSe),
+        backgroundColor: '#25f4ee',
+        borderRadius: 4,
+        borderWidth: 0,
+        stack: 'engage',
+      },
+      {
+        label: 'Bình luận',
+        data: ttVideos.map(v => v.binhLuan),
+        backgroundColor: '#f59e0b',
+        borderRadius: 4,
+        borderWidth: 0,
+        stack: 'engage',
+      }
+    ]
+  },
+  options: {
+    ...chartDefaults,
+    indexAxis: 'y',
+    scales: {
+      x: { grid: { color: '#2e2e2e' }, ticks: { color: '#a0a0a0' }, stacked: true },
+      y: { grid: { display: false }, ticks: { color: '#fff', font: { size: 11 } }, stacked: true }
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: { color: '#a0a0a0', font: { size: 11 }, boxWidth: 12, padding: 12 }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
